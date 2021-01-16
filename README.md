@@ -7,6 +7,8 @@ Additionally, I must add that these are instructions for Windows only.
 # Required files
 - You need to have this repository cloned anywhere on your computer. This is the workspace we will be using.
 
+- Autodesk Maya installed, preferably any version from 2016-2020.
+
 - You need to be able to use the program [``make``](https://chocolatey.org/packages/make) to build the models. You can check whether or not you have make already installed by typing ``make`` in a command prompt. If you do not have make installed, I recommend installing [Chocolatey:](https://chocolatey.org/install)
   - With Chocolatey, you can install make via ``choco install make`` in the command line or Powershell.
 
