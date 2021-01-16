@@ -1,23 +1,24 @@
 This guide is intended to address frustrations one may bump into while trying to figure out how to build Spotify's models. It is also written in a way for which individuals with lesser technical experience can navigate through and build the models themselves. I've also included a few scripts to help expedite some processes.
 
-Firstly, I must say that a good portion of the instructions and this workspace itself was curated by Brian Lach. You can find his Github [here](https://github.com/lachbr).
+Firstly, I must say that a good portion of the instructions and workspace itself was curated by Brian Lach. You can find his Github [here](https://github.com/lachbr).
 
 Additionally, I must add that these are instructions for Windows only.
 
 # Required files
-- You need to have [this](https://github.com/loonaticx/ttmodels) modified version of Spotify cloned anywhere on your computer. This is the workspace we will be using.
+- You need to have this repository cloned anywhere on your computer. This is the workspace we will be using.
 
-- You need to be able to use the program [``make``](https://chocolatey.org/packages/make) to build the models. You can check whether or not you have make already installed by typing it in the command prompt. If you do not have make installed, I would install [Chocolatey:](https://chocolatey.org/install)
+- You need to be able to use the program [``make``](https://chocolatey.org/packages/make) to build the models. You can check whether or not you have make already installed by typing ``make`` in a command prompt. If you do not have make installed, I recommend installing [Chocolatey:](https://chocolatey.org/install)
   - With Chocolatey, you can install make via ``choco install make`` in the command line or Powershell.
 
-- Lastly, I highly recommend (although not officially required) using a build of Panda3D with [this](https://github.com/panda3d/panda3d/commit/74a464896589f2ae0fa0c9f3b1728abc9fd9182f) commit. This reintroduces the maya2egg server, which would greatly reduce the total time it will take to build all of the models.
+- Lastly, I highly recommend using a build of Panda3D with [this](https://github.com/panda3d/panda3d/commit/74a464896589f2ae0fa0c9f3b1728abc9fd9182f) commit. This reintroduces the maya2egg server, which would greatly reduce the total time it will take to build all of the models.
   - If you do not already have a Panda3D install with Maya support, you will need to either build or install a version with the Maya tools.
+  - *There is a prebuilt Panda3D binary uploaded in the Releases tab that already includes these tools, including the Maya server.*
 
 # Configuring ppremake
 
 Panda Premake ("ppremake") is a deprecated tool that was originally used to build and convert files en masse for the Panda3D engine. While the binary is no longer available in modern versions of Panda, it was built to be compatible as a standalone application. To save time and possible frustration, I've included a prebuilt version of ppremake located within the ttmodels directory.
 
-If you decide not to use a Panda3D version with Maya support, you must open [**ttmodels/Package.pp**](https://github.com/tsp-team/ttmodels/blob/master/ttmodels/Package.pp) and change the line reading `#define MAYA2EGG maya2egg_client` to `#define MAYA2EGG maya2egg<MAYAVERSION>`. *Note that `<MAYAVERSION>` should be replaced with the version of Maya you are using along with the version of maya2egg your Panda3D installation comes with.*
+If you decide not to use a Panda3D version with Maya support, you must open [**ttmodels/Package.pp**](https://github.com/loonaticx/ttmodels/blob/master/ttmodels/Package.pp) and change the line reading `#define MAYA2EGG maya2egg_client` to `#define MAYA2EGG maya2egg<MAYAVERSION>`. *Note that `<MAYAVERSION>` should be replaced with the version of Maya you are using along with the version of maya2egg your Panda3D installation comes with.*
 
 If you are using a Panda3D build with Maya server support, ensure that you have the Maya service running in the background *before starting the build process*. Simply open up a new command prompt and run ``maya2egg<MAYAVERSION> -server``. Any time you would like to convert a Maya file to an Egg file, you would simply run ``maya2egg_client <input.mb> <output.egg>`` on a new shell instance.
 
@@ -25,7 +26,7 @@ If you are using a Panda3D build with Maya server support, ensure that you have 
 
 Due to a bug within **char/boss/Sources.pp**, you will need to adjust the line reading ``#define MAYA2EGG maya2egg`` to ``#define MAYA2EGG maya2egg<MAYAVERSION>``. If you are using a maya2egg server, do **NOT** use the client version (``maya2egg_client``). Instead, use the same maya2egg version as the server you're hosting.
 
-This means that all of the models within **char/boss/** will have to be converted in a manual fashion, which will briefly slow down the build process.
+This means that all of the models within **char/boss/** will have to be converted in a manual fashion which will briefly slow down the build process.
 
 # Generating Makefiles
 
