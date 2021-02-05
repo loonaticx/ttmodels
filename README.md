@@ -30,6 +30,9 @@ Due to a bug within **char/boss/Sources.pp**, you will need to adjust the line r
 
 This means that all of the models within **char/boss/** will have to be converted in a manual fashion which will briefly slow down the build process.
 
+(Updated 2/4/21) For some reason, the egg-optchar and egg-trans procedure is completely missed. There is probably a fix for this by editing the sources.pp file, but for now I will just say to open the Makefile and run the commands yourself for whichever model. It seems to be that it can't read from a temp file it just created, so the mitigation is to just apply these commands directly to the egg file itself instead of creating a temp file. This will be updated when a patch is created.
+
+
 # Generating Makefiles
 
 Once adjusting our build configurations, we will let ppremake scrub over all the Sources.pp files within the model tree to generate Makefiles that will build the assets.
