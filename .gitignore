@@ -5,3 +5,4 @@ built/
 stamp
 *Makefile*
 *.boo
+.mayaSwatches
